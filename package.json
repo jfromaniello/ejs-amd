@@ -1,0 +1,28 @@
+{
+  "name": "ejs-amd",
+  "keywords": [
+    "ejs",
+    "amd",
+    "compiler",
+    "middleware"
+  ],
+  "author": "José F. Romaniello <jfromaniello@gmail.com> (http://joseoncode.com)",
+  "version": "0.0.1",
+  "description": "Server-side EJS compiler to .js files or express middleware.",
+  "main": "./lib",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "license": "BSD",
+  "dependencies": {
+    "ejs": "~0.8.3",
+    "commander": "~1.0.4",
+    "mkdirp": "~0.3.4",
+    "findit": "~0.1.2"
+  },
+  "devDependencies": {
+    "should": "~1.2.0",
+    "mocha": "~1.5.0"
+  }
+}
