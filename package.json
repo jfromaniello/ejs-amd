@@ -8,12 +8,18 @@
   ],
   "author": "José F. Romaniello <jfromaniello@gmail.com> (http://joseoncode.com)",
   "version": "0.0.1",
-  "description": "Server-side EJS compiler to .js files or express middleware.",
+  "description": "standalone and express/connect middleware to serve EJS template as AMD .js files to the browser",
   "main": "./lib",
   "scripts": {
     "test": "mocha"
   },
-  "repository": "",
+  "bin": {
+    "ejs-amd": "./bin/ejs-amd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/jfromaniello/ejs-amd.git"
+  },
   "license": "BSD",
   "dependencies": {
     "ejs": "~0.8.3",
