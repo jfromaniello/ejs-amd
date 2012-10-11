@@ -27,18 +27,18 @@ if (!program.from && !program.to) {
 console.log();
 process.on("exit", console.log);
 
-var finder = require("findit").find(program.from);
+var finder = require("walkdir").walk(program.from);
 
 finder.on("file", function (file) {
   var suffixRe = /\.ejs$/;
-  if ( suffixRe.test(file) ) { 
-
-    var local_path = file.replace( new RegExp("^" + program.from + "/+"), "");
-    var fromPath = path.join( program.from, local_path);
-    var toPath   = path.join( program.to, local_path).replace(suffixRe, ".js");
-
-    renderFile( fromPath, toPath );
+  if ( suffixRe.test(file) ) {
+    var toPath = path.resolve(".", program.to, path.basename(file, '.ejs') + ".js")
+    renderFile(file, toPath );
   }
+});
+
+finder.on("error", function(err) {
+  console.log('ERROR reading:' + err);
 });
 
 
