@@ -32,7 +32,7 @@ var finder = require("walkdir").walk(program.from);
 finder.on("file", function (file) {
   var suffixRe = /\.ejs$/;
   if ( suffixRe.test(file) ) {
-    var toPath = path.resolve(".", program.to, path.basename(file, '.ejs') + ".js")
+    var toPath = path.resolve(".", program.to, path.basename(file, '.ejs') + ".js");
     renderFile(file, toPath );
   }
 });
@@ -46,7 +46,10 @@ function renderFile(fromPath, toPath) {
   fs.readFile(fromPath, "utf8", function(err, str){
     if (err) throw err;
 
-    var fn = ejs.compile(str, {client: true}).toString();
+    var fn = ejs.compile(str, {
+      client: true,
+      filename: fromPath
+    }).toString();
     var dir = path.resolve(path.dirname(toPath));
 
     mkdirp(dir, 0755, function(err){

@@ -39,6 +39,20 @@ describe("ejs middleware", function(){
     middleware(request, response);
   });
 
+  it("should work with includes", function(done){
+    var request = {
+        url: "/including.js"
+      }, response = {
+        header: function(){
+        },
+        end: function(content){
+          eval(content)().should.eql("<p>hello world</p>");
+          done();
+        }
+      };
+    middleware(request, response);
+  });
+
   it("should call next if the ejs doesnt exist", function(done){
     var request = {
         url: "/testosterona.js"
