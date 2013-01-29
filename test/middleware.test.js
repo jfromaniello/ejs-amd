@@ -60,4 +60,28 @@ describe("ejs middleware", function(){
 
     middleware(request, response, done);
   });
+
+  it("should pass the specified options to ejs", function(done){
+    var request = {
+        url: "/custom.js"
+      },
+      response = {
+        header: function(){
+        },
+        end: function(content){
+          var template = eval(content);
+          var html = template({message: "Hello World!"});
+
+          html.trim().should.be.eql("<p>Hello World!</p>");
+          done();
+        }
+      },
+      options = {
+        views: __dirname + "/fixture",
+        open: "{{",
+        close: "}}"
+      };
+
+    ejsamd.middleware(options)(request, response);
+  });
 });
