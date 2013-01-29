@@ -7,7 +7,7 @@
     "middleware"
   ],
   "author": "José F. Romaniello <jfromaniello@gmail.com> (http://joseoncode.com)",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "standalone and express/connect middleware to serve EJS template as AMD .js files to the browser",
   "main": "./lib",
   "scripts": {
