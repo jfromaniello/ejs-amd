@@ -10,8 +10,11 @@ var fs      = require("fs"),
 program
   .version(require("../package.json").version)
   .usage("[options] [dir|file ...]")
-  .option("-f, --from <dir>",                "dir to look for ejs templates in")
-  .option("-t, --to <dir>",                  "output the compiled js to <dir>");
+  .option("-f, --from <dir>", "dir to look for ejs templates in")
+  .option("-t, --to <dir>",  "output the compiled js to <dir>")
+  .option("-d, --compileDebug", "set the compileDebug flag to TRUE")
+  .option("-o, --open <otag>", "set the open tag to <otag>")
+  .option("-c, --close <ctag>", "set the close tag to <ctag>");
 
 program.parse(process.argv);
 
@@ -41,15 +44,25 @@ finder.on("error", function(err) {
   console.log('ERROR reading:' + err);
 });
 
-
 function renderFile(fromPath, toPath) {
   fs.readFile(fromPath, "utf8", function(err, str){
     if (err) throw err;
 
-    var fn = ejs.compile(str, {
+    var options = {
       client: true,
-      filename: fromPath
-    }).toString();
+      filename: fromPath,
+      compileDebug: program.compileDebug === true
+    };
+
+    if (typeof program.open === "string"){
+      options.open = program.open;
+    }
+
+    if (typeof program.close === "string"){
+      options.close = program.close;
+    }
+
+    var fn = ejs.compile(str, options).toString();
     var dir = path.resolve(path.dirname(toPath));
 
     mkdirp(dir, 0755, function(err){
