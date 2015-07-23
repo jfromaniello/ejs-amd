@@ -78,8 +78,7 @@ describe("ejs middleware", function(){
       },
       options = {
         views: __dirname + "/fixture",
-        open: "{{",
-        close: "}}"
+        delimiter: '?'
       };
 
     ejsamd.middleware(options)(request, response);
