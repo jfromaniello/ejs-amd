@@ -22,7 +22,7 @@
   },
   "license": "BSD",
   "dependencies": {
-    "ejs": "~0.8.3",
+    "ejs": "~2.3.3",
     "commander": "~1.0.4",
     "mkdirp": "~0.3.4",
     "walkdir": "0.0.5"
